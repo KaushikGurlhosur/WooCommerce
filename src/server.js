@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./config/database.js";
 import productRoutes from "./routes/productRoutes.js";
+import segmentRoutes from "./routes/segmentRoutes.js";
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json()); // for JSON parsing
 
 // Routes
 app.use("/api", productRoutes);
+app.use("/api", segmentRoutes);
 
 // Root route
 app.get("/", (req, res) => {
