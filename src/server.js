@@ -1,10 +1,30 @@
 import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./config/database.js";
+import { fetchAllProducts } from "./scripts/ingestProducts.js";
 
 const app = express();
 
 dotenv.config();
+
+// Routes
+app.get("/", async (req, res) => {
+  try {
+    const products = await fetchAllProducts();
+    res.json({
+      message: "✅ Products fetched successfully",
+      total: products.length,
+      sample: products.slice(0, 3), // just first 3 to preview
+    });
+  } catch (error) {
+    console.error("❌ Error in / route:", error.message);
+    res.status(500).json({
+      error: "Failed to fetch products",
+      message: error.message,
+      stack: error.stack,
+    });
+  }
+});
 
 (async () => {
   try {
