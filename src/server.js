@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./config/database.js";
-import { fetchAllProducts, storeProducts } from "./scripts/ingestProducts.js";
+import productRoutes from "./routes/productRoutes.js";
 
 const app = express();
 
@@ -10,23 +10,11 @@ dotenv.config();
 app.use(express.json()); // for JSON parsing
 
 // Routes
-app.get("/", async (req, res) => {
-  try {
-    const products = await fetchAllProducts();
-    const result = await storeProducts(products);
-    res.json({
-      message: "✅ Products fetched successfully",
-      total: products.length,
-      sample: products.slice(0, 3), // just first 3 to preview
-    });
-  } catch (error) {
-    console.error("❌ Error in / route:", error.message);
-    res.status(500).json({
-      error: "Failed to fetch products",
-      message: error.message,
-      stack: error.stack,
-    });
-  }
+app.use("/api", productRoutes);
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("🚀 WooCommerce API Server is running!");
 });
 
 (async () => {
