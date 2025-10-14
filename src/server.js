@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./config/database.js";
-import { fetchAllProducts } from "./scripts/ingestProducts.js";
+import { fetchAllProducts, storeProducts } from "./scripts/ingestProducts.js";
 
 const app = express();
 
@@ -11,6 +11,7 @@ dotenv.config();
 app.get("/", async (req, res) => {
   try {
     const products = await fetchAllProducts();
+    const result = await storeProducts(products);
     res.json({
       message: "✅ Products fetched successfully",
       total: products.length,
