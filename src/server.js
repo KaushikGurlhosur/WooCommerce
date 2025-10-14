@@ -7,6 +7,8 @@ const app = express();
 
 dotenv.config();
 
+app.use(express.json()); // for JSON parsing
+
 // Routes
 app.get("/", async (req, res) => {
   try {
