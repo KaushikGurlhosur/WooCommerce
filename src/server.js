@@ -12,7 +12,7 @@ import cors from "cors";
 const app = express();
 
 // CORS setup
-app.use(cors({ origin: "https://woo-commerce-frontend-drab.vercel.app/" }));
+app.use(cors({ origin: "https://woo-commerce-frontend-drab.vercel.app" }));
 
 dotenv.config();
 
