@@ -7,8 +7,12 @@ import "./cron/cronJobs.js";
 import helmet from "helmet";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { notFound } from "./middleware/notFound.js";
+import cors from "cors";
 
 const app = express();
+
+// CORS setup
+app.use(cors({ origin: "http://localhost:3000" }));
 
 dotenv.config();
 
