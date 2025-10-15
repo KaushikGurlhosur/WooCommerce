@@ -4,12 +4,14 @@ import { connectDB } from "./config/database.js";
 import productRoutes from "./routes/productRoutes.js";
 import segmentRoutes from "./routes/segmentRoutes.js";
 import "./cron/cronJobs.js";
+import helmet from "helmet";
 
 const app = express();
 
 dotenv.config();
 
 app.use(express.json()); // for JSON parsing
+app.use(helmet()); // for security headers
 
 // Routes
 app.use("/api", productRoutes);
