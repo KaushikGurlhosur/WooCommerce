@@ -5,6 +5,8 @@ import productRoutes from "./routes/productRoutes.js";
 import segmentRoutes from "./routes/segmentRoutes.js";
 import "./cron/cronJobs.js";
 import helmet from "helmet";
+import { errorHandler } from "./middleware/errorHandler.js";
+import { notFound } from "./middleware/notFound.js";
 
 const app = express();
 
@@ -21,6 +23,11 @@ app.use("/api", segmentRoutes);
 app.get("/", (req, res) => {
   res.send("🚀 WooCommerce API Server is running!");
 });
+
+app.use(notFound);
+
+// Global error handler
+app.use(errorHandler);
 
 (async () => {
   try {

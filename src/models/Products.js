@@ -61,4 +61,9 @@ const productSchema = new mongoose.Schema(
   }
 );
 
+productSchema.index({ category: 1 });
+productSchema.index({ stock_status: 1 });
+productSchema.index({ on_sale: 1 });
+productSchema.index({ created_at: -1 });
+
 export default mongoose.model("Product", productSchema);
