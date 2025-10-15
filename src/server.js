@@ -3,6 +3,7 @@ import express from "express";
 import { connectDB } from "./config/database.js";
 import productRoutes from "./routes/productRoutes.js";
 import segmentRoutes from "./routes/segmentRoutes.js";
+import "./cron/cronJobs.js";
 
 const app = express();
 

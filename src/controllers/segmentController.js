@@ -1,12 +1,5 @@
 import Products from "../models/Products.js";
 
-/**
- * Parse text-based filter rules and return MongoDB query
- * Example input:
- * price > 1000
- * stock_status = instock
- * on_sale = true
- */
 function parseSegmentRules(rulesText) {
   const lines = rulesText
     .split("\n")
